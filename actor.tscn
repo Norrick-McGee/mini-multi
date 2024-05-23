@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://p5l8iv5e00yf"]
+
+[ext_resource type="Script" path="res://actor.gd" id="1_a0t7o"]
+[ext_resource type="Texture2D" uid="uid://hu1v52ugfxyj" path="res://icon.svg" id="1_yxrgl"]
+[ext_resource type="Script" path="res://MultiplayerSyncInput.gd" id="3_hbdpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8irm"]
+size = Vector2(135, 132)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p0ix5"]
+properties/0/path = NodePath(".:inputs")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4if6c"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Actor" type="CharacterBody2D" node_paths=PackedStringArray("MultiplayerSyncInput", "MultiplayerSyncPos")]
+script = ExtResource("1_a0t7o")
+MultiplayerSyncInput = NodePath("MultiplayerSyncInput")
+MultiplayerSyncPos = NodePath("MultiplayerSyncPos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -1)
+shape = SubResource("RectangleShape2D_v8irm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(2, -1)
+texture = ExtResource("1_yxrgl")
+
+[node name="MultiplayerSyncInput" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_p0ix5")
+script = ExtResource("3_hbdpc")
+
+[node name="MultiplayerSyncPos" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4if6c")

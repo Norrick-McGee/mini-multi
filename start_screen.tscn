@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://jpvggna8mat2"]
+
+[ext_resource type="Script" path="res://start_screen.gd" id="1_e25ie"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e25ie")
+
+[node name="HostButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 284.0
+offset_right = 460.0
+offset_bottom = 351.0
+text = "Host
+"
+
+[node name="JoinButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 594.0
+offset_top = 287.0
+offset_right = 724.0
+offset_bottom = 354.0
+text = "Join"
+
+[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
